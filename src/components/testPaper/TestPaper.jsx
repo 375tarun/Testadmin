@@ -1,40 +1,16 @@
-import React from "react";
+import React from 'react';
 
-const TestPaper = ({ test, onEdit, onAddQuestions }) => {
+const TestPaper = ({ test }) => {
   return (
-    <div className="p-4 w-full bg-amber-100 rounded-lg shadow-md flex flex-col gap-3">
-      {/* Test Name */}
-      <h2 className="text-xl font-bold text-gray-800">{test.testName}</h2>
-      
-      {/* Test Details */}
-      <p className="text-gray-600">
-        <strong>Type:</strong> {test.testType}
-      </p>
-      <p className="text-gray-600">
-        <strong>Topics:</strong> {test.topics?.length ? test.topics.join(", ") : "No topics selected"}
-      </p>
-      <p className="text-gray-600">
-        <strong>Duration:</strong> {test.duration} min
-      </p>
-      <p className="text-gray-600">
-        <strong>Total Questions:</strong> {test.totalQuestions}
-      </p>
-
-      {/* Action Buttons */}
-      <div className="flex gap-4 mt-2">
-        <button
-          className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition"
-          onClick={() => onEdit && onEdit(test)}
-        >
-          Edit
-        </button>
-        <button
-          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
-          onClick={() => onAddQuestions && onAddQuestions(test)}
-        >
-          Add Questions
-        </button>
-      </div>
+    <div className="border p-4 rounded shadow-lg bg-white">
+      <h3 className="text-lg font-bold">{test?.testName}</h3>
+      <p><strong>Type:</strong> {test?.testType}</p>
+      <p><strong>Difficulty:</strong> {test?.testDifficulty}</p>
+      <p><strong>Topics:</strong> {test?.testTopic.join(', ')}</p>
+      <p><strong>Duration:</strong> {test?.testDuration} min</p>
+      <p><strong>Total Questions:</strong> {test?.totalQuestion}</p>
+      {/* <p><strong>Total Marks:</strong> {test.totalMarks}</p> */}
+      <p><strong>Negative Marking:</strong> {test?.negativeMarking ? 'Yes' : 'No'}</p>
     </div>
   );
 };
