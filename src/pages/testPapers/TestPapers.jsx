@@ -1,49 +1,38 @@
-import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { addTestPaper } from "../../redux/slices/testPaperSlice";
-import TestPaper from "../../components/testPaper/TestPaper";
-import TestPaperButton from "../../components/testPaper/TestPaperButton";
-import TestPaperForm from "../../components/testPaper/TestPaperForm";
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getTestPapers } from '../../redux/slices/testPaperSlice';
+import TestPaper from '../../components/testPaper/TestPaper';
+import TestPaperButton from '../../components/testPaper/TestPaperButton';
 
 const TestPapers = () => {
   const dispatch = useDispatch();
-  const testPapers = useSelector((state) => state.testPapers.testPapers);
-  const [showForm, setShowForm] = useState(false);
+  const { testPapers, loading, error } = useSelector((state) => state.testPapers);
 
-  // ✅ Ensure onSave is properly defined
-  const handleSaveTest = (newTestPaper) => {
-    console.log("✅ Saving Test Paper:", newTestPaper);
+  console.log(testPapers)
 
-    if (!newTestPaper) {
-      console.error("❌ Invalid test paper data!");
-      return;
-    }
-
-    dispatch(addTestPaper(newTestPaper));
-    setShowForm(false);
-  };
+  useEffect(() => {
+    dispatch(getTestPapers());
+  }, [dispatch]);
 
   return (
-    <div className="p-6 relative h-screen flex flex-col">
-      <div className="absolute top-4 right-4">
-        {/* ✅ Pass handleSaveTest to TestPaperButton */}
-        <TestPaperButton onSave={handleSaveTest} />
+    <div className="w-full flex flex-col space-y-4">
+      <div className="w-full flex justify-between items-center p-4 bg-gray-100 rounded">
+        <h2 className="text-2xl font-bold">Test Papers</h2>
+        <TestPaperButton />
       </div>
 
-      <h1 className="text-3xl font-bold mt-10 text-gray-800">Test Papers</h1>
-
-      {showForm && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-          {/* ✅ Pass handleSaveTest to TestPaperForm */}
-          <TestPaperForm onClose={() => setShowForm(false)} onSave={handleSaveTest} />
+      {loading && <p>Loading test papers...</p>}
+      {error && <p className="text-red-500">Error: {error}</p>}
+      
+      {testPapers.length === 0 ? (
+        <p className="text-center text-gray-500">No test papers available</p>
+      ) :  (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {testPapers.map((test) => (
+            <TestPaper key={test?._id} test={test} />
+          ))}
         </div>
       )}
-
-      <div className="mt-10 w-full max-w-3xl flex flex-col gap-4">
-        {testPapers.map((test, index) => (
-          <TestPaper key={index} test={test} />
-        ))}
-      </div>
     </div>
   );
 };
