@@ -51,7 +51,7 @@ const Sidebar = () => {
         </ul>
 
         {/* Logout Button */}
-        <div className="w-full p-4 hover:bg-red-700 transition-all duration-300 flex items-center gap-3 cursor-pointer mb-5">
+        <div className="w-full p-4 bg-red-700 transition-all duration-300 flex items-center gap-3 cursor-pointer mb-5">
           <FaSignOutAlt /> {sidebarOpen && <span className="text-lg font-semibold">Logout</span>}
         </div>
       </div>
