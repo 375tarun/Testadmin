@@ -4,7 +4,7 @@ import Login from "./pages/auth/Login";
 import SignUp from "./pages/auth/SignUp";
 import Dashboard from "./pages/dashboard/Dashboard";
 import TestPapers from "./pages/testPapers/TestPapers";
-// import TestQuestionPage from "./pages/testQuestions/TestQuestionPage";
+import TestQuestionPage from "./pages/questionPage/TestQuestionPage";
 import LayoutContainer from "./layout/LayoutContainer";
 
 const App = () => {
@@ -19,7 +19,7 @@ const App = () => {
         <Route path="/" element={<LayoutContainer />}>
           <Route index element={<Dashboard />} />
           <Route path="/tests" element={<TestPapers />} />
-          {/* <Route path="/tests/:testId" element={<TestQuestionPage />} /> */}
+          <Route path="/tests/:testId" element={<TestQuestionPage />} />
         </Route>
 
         {/* Fallback Route */}

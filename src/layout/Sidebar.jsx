@@ -23,7 +23,7 @@ const Sidebar = () => {
       <div
         className={`${
           sidebarOpen ? "w-64" : "w-16"
-        } bg-blue-900 text-white h-screen transition-all duration-300 flex flex-col items-center pt-5`}
+        } bg-blue-900 text-white h-screen transition-all duration-300 flex flex-col items-center  pt-5`}
       >
         <div
           className="cursor-pointer text-2xl mb-5"
