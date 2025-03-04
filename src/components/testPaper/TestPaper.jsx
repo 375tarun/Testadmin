@@ -1,38 +1,55 @@
-import React from "react";
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { deleteTestPaper, setSelectedTestPaper } from '../../redux/slices/testPaperSlice';
 
-const TestPaper = ({ test, onEdit, onAddQuestions }) => {
+const TestPaper = ({ test, onEdit, onDelete }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleDelete = async () => {
+    if (window.confirm('Are you sure you want to delete this test paper?')) {
+      try {
+        await dispatch(deleteTestPaper(test._id)).unwrap();
+        onDelete && onDelete(test);
+      } catch (error) {
+        console.error('Failed to delete test paper:', error);
+      }
+    }
+  };
+
   return (
-    <div className="p-4 w-full bg-amber-100 rounded-lg shadow-md flex flex-col gap-3">
-      {/* Test Name */}
-      <h2 className="text-xl font-bold text-gray-800">{test.testName}</h2>
+    <div className="bg-gray-50 p-6 rounded-2xl shadow-md border border-gray-200 flex flex-col justify-between">
+      <div>
+        <h3 className="text-xl font-semibold text-gray-800 mb-2">{test?.testName}</h3>
+        <p className="text-gray-600"><strong>Type:</strong> {test?.testType}</p>
+        <p className="text-gray-600"><strong>Difficulty:</strong> {test?.testDifficulty}</p>
+        <p className="text-gray-600"><strong>Topics:</strong> {test?.testTopic.join(', ')}</p>
+        <p className="text-gray-600"><strong>Duration:</strong> {test?.testDuration} min</p>
+        <p className="text-gray-600"><strong>Total Questions:</strong> {test?.totalQuestion}</p>
+        <p className="text-gray-600"><strong>Negative Marking:</strong> {test?.negativeMarking ? 'Yes' : 'No'}</p>
+      </div>
       
-      {/* Test Details */}
-      <p className="text-gray-600">
-        <strong>Type:</strong> {test.testType}
-      </p>
-      <p className="text-gray-600">
-        <strong>Topics:</strong> {test.topics?.length ? test.topics.join(", ") : "No topics selected"}
-      </p>
-      <p className="text-gray-600">
-        <strong>Duration:</strong> {test.duration} min
-      </p>
-      <p className="text-gray-600">
-        <strong>Total Questions:</strong> {test.totalQuestions}
-      </p>
-
-      {/* Action Buttons */}
-      <div className="flex gap-4 mt-2">
-        <button
-          className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition"
-          onClick={() => onEdit && onEdit(test)}
+      <div className="flex justify-between mt-4">
+        <button 
+          className="flex-1 px-4 py-2 bg-blue-300 text-gray-800 rounded-lg hover:bg-blue-400 transition-all"
+          onClick={() => onEdit(test)}
         >
           Edit
         </button>
-        <button
-          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
-          onClick={() => onAddQuestions && onAddQuestions(test)}
+        <button 
+          className="flex-1 px-4 py-2 bg-red-300 text-gray-800 rounded-lg hover:bg-red-400 transition-all mx-2"
+          onClick={handleDelete}
         >
-          Add Questions
+          Delete
+        </button>
+        <button 
+          className="flex-1 px-4 py-2 bg-green-300 text-gray-800 rounded-lg hover:bg-green-400 transition-all"
+          onClick={() => {
+            dispatch(setSelectedTestPaper(test))
+            navigate(`/tests/${test._id}`)}}
+        >
+          Open
         </button>
       </div>
     </div>
