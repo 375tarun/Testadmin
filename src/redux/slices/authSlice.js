@@ -1,8 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-const API_URL = "http://localhost:8080/api/adminAuth"; // Adjust based on your backend
+const API_URL =  "https://testplatformserver.onrender.com/api/adminAuth"; // Adjust based on your backend
 
-// Load token & user data from localStorage (if available)
+// Load token & user data from localStorage (if available)    "http://localhost:8080/api/adminAuth" ||
 const token = localStorage.getItem("token") || null;
 const user = token ? JSON.parse(localStorage.getItem("user")) : null;
 

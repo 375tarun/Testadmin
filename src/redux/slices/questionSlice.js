@@ -1,7 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 // Replace with your actual API endpoint
-const API_URL = "http://localhost:8080/api/question";
+const API_URL =  "https://testplatformserver.onrender.com/api/question";
+// const API_URL = "http://localhost:8080/api/question";
 
 // Thunk for creating a question
 export const createQuestion = createAsyncThunk(

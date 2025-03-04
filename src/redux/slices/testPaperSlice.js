@@ -1,7 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 // Replace with your actual API endpoint
-const API_URL = "http://localhost:8080/api/test";
+const API_URL =  "https://testplatformserver.onrender.com/api/test";
+// const API_URL = "http://localhost:8080/api/test";
 
 // Thunk for fetching a specific test paper by ID
 export const getTestPaperById = createAsyncThunk(
