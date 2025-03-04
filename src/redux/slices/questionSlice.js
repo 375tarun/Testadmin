@@ -62,6 +62,7 @@ export const deleteQuestion = createAsyncThunk(
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
+          
         },
       });
 

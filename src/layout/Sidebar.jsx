@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FaHome, FaFileAlt, FaBars, FaTimes, FaSignOutAlt, FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import Logout from "../pages/auth/Logout"
 
 const Sidebar = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -52,7 +53,7 @@ const Sidebar = () => {
 
         {/* Logout Button */}
         <div className="w-full p-4 hover:bg-red-700 transition-all duration-300 flex items-center gap-3 cursor-pointer mb-5">
-          <FaSignOutAlt /> {sidebarOpen && <span className="text-lg font-semibold">Logout</span>}
+          <FaSignOutAlt /> {sidebarOpen && <span className="text-lg font-semibold"><Logout/></span>}
         </div>
       </div>
 

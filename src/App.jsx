@@ -6,20 +6,23 @@ import Dashboard from "./pages/dashboard/Dashboard";
 import TestPapers from "./pages/testPapers/TestPapers";
 import TestQuestionPage from "./pages/questionPage/TestQuestionPage";
 import LayoutContainer from "./layout/LayoutContainer";
+import PrivateRoute from "./pages/auth/PrivateRoute"; // Import PrivateRoute
 
 const App = () => {
   return (
     <Router>
       <Routes>
-        {/* Auth Route */}
+        {/* Public Routes */}
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
 
-        {/* Admin Dashboard */}
-        <Route path="/" element={<LayoutContainer />}>
-          <Route index element={<Dashboard />} />
-          <Route path="/tests" element={<TestPapers />} />
-          <Route path="/tests/:testId" element={<TestQuestionPage />} />
+        {/* Protected Routes - Require Authentication */}
+        <Route element={<PrivateRoute />}>
+          <Route path="/" element={<LayoutContainer />}>
+            <Route index element={<Dashboard />} />
+            <Route path="/tests" element={<TestPapers />} />
+            <Route path="/tests/:testId" element={<TestQuestionPage />} />
+          </Route>
         </Route>
 
         {/* Fallback Route */}

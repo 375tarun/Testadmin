@@ -12,6 +12,7 @@ export const getTestPaperById = createAsyncThunk(
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
+           "Authorization": `Bearer ${localStorage.getItem('token')}`
         },
       });
 
@@ -36,6 +37,7 @@ export const createTestPaper = createAsyncThunk(
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+           "Authorization": `Bearer ${localStorage.getItem('token')}`
         },
         body: JSON.stringify(testPaperData),
       });
@@ -65,6 +67,7 @@ export const getTestPapers = createAsyncThunk(
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
+           "Authorization": `Bearer ${localStorage.getItem('token')}`
         },
       });
 
@@ -89,6 +92,7 @@ export const deleteTestPaper = createAsyncThunk(
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
+           "Authorization": `Bearer ${localStorage.getItem('token')}`
         },
       });
 
